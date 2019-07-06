@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pokemon详情页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <style type="text/css">
+
+        
+        .p8{
+            font-size: 20px;
+            color: #b0b0b0;
+        }
+        #button1{
+            font-size: 20px;
+
+            -webkit-border-radius: 18px;
+            -moz-border-radius: 18px;
+            width:60px;
+            color:white;
+            margin-left:57px;
+
+        }
+        #button2{
+            font-size: 20px;
+
+            -webkit-border-radius: 18px;
+            -moz-border-radius: 18px;
+            width:60px;
+            color:white;
+
+        }
+        .p9{
+            font-size: 20px;
+            color: #ff5f19;
+
+        }
+        .p7{
+            font-size: 15px;
+            color: #b0b0b0;
+            width:60%;
+
+        }
+        .product3{
+            width:100%;
+            position: relative;
+            margin: 20px 0 5px 0;
+            height: 500px;
+            background: #fafafa;
+        }
+
+        .img4{
+            width: 220px;
+            height: 220px;
+            float: left;
+            margin-right: 20px;
+
+        }
+        .img5{
+
+            float: left;
+            margin-right: 20px;
+        }
+        .pq{
+            margin-top:6px;
+        }
+
+        .t{
+            float: left;
+            width: 260px;
+            height: 260px;
+
+        }
+
+
+
+    </style>
+    <script type="text/javascript">
+        var abc ='004';
+        //jquery读json数据，并且调用加入div的方法,把对应id的pokemon数据,传入到想传入的div
+        function ajax_test(divname,objid) {
+            $.ajax({
+                type: "GET",//请求方式
+                url: "json/pokedex.json",//地址，就是json文件的请求路径
+                dataType: "json",//数据类型可以为 text xml json  script  jsonp
+                success: function(result){//返回的参数就是 action里面所有的有get的参数
+                    addBox(result,divname,objid);
+                }
+            });
+
+        }
+        ajax_test('box',abc);
+        function addBox(result,divname,objid){
+            var a = '#' +divname;
+            //result是一个集合,先遍历
+            $.each(result,function(index,obj){
+                  var type1,type2;
+                if(obj['id']==objid) {
+                    console.log(obj)
+
+                    if(obj['type'].length==1)
+                    {
+                        type1 =obj['type'];
+
+                        var imgsrc = './json/img/' + obj['id'] + obj['ename'] + '.png';
+                        var sprsrc = './json/spr/' + obj['id'] + 'MS.png';
+                        var d=JSON.stringify(obj['base']);
+                        console.log(obj)
+                        localStorage.base=d;
+                        $(a).append("<div class='product3'  >" +//获得图片
+                            "<div><img class='img4' src=" + imgsrc + "/></div>" +
+                            //获得小图
+                            "<div><img class='img5' src=" + sprsrc + "/></div>" +
+                            //获得名字
+                            "<div class='p9 pq'> " + obj['cname'] +"&nbsp;&nbsp;"+ obj['ename'] + " </div>" +
+                            //获得id
+                            "<div class='p8 pq'>  ID：" + obj['id'] + "</div>" +
+                            "<div class='pq'> <button id='button1'> " + type1 +  "</button>    </div>" +
+                            // "<div class='p1 p'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"http://www.baidu.com\">查看详情</a>" + "</div>" +
+                            "<div class='p7 pq'>  介绍：" + obj['i'] + "</div>" +
+                            "<iframe class='t'  src='./pmradar.html' scrolling='no'  frameborder='no' border='0'></iframe>"+
+                            "</div>");
+
+                        if(type1=='超能')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#FF5599");
+                            });
+                        }
+                        else if(type1=='草')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#77CC55");
+                            });
+                        }
+                        else if(type1=='一般')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#BBBBAA");
+                            });
+                        }
+                        else if(type1=='虫')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#AABB22");
+                            });
+                        }
+                        else if(type1=='水')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#3399FF");
+                            });
+                        }
+                        else if(type1=='炎')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#FF4422");
+                            });
+                        }
+                        else if(type1=='毒')
+                        {
+                            console.log("aaaa")
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#AF5599");
+                            });
+                        }
+                        else if(type1=='电')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#FFCC33");
+                            });
+                        }
+                        else if(type1=='飞行')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#6699FF");
+                            });
+                        }
+                        else if(type1=='地上')
+                        {
+                            console.log("aaaa")
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#D3AF55");
+                            });
+                        }
+                        else if(type1=='冰')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#77D3FF");
+                            });
+                        }
+                        else if(type1=='格斗')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#BB5544");
+                            });
+                        }
+                        else if(type1=='超能')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#FF5599");
+                            });
+                        }
+                        else if(type1=='岩石')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#BBAA66");
+                            });
+                        }
+                        else if(type1=='幽灵')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#6666BB");
+                            });
+                        }
+                        else if(type1=='龙')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#7766EE");
+                            });
+                        }
+                        else if(type1=='恶')
+                        {
+
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#775544");
+                            });
+                        }
+                        else if(type1=='钢')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#AAAABB");
+                            });
+                        }
+                        else if(type1=='妖精')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#FFAAFF");
+                            });
+                        }
+
+                    }
+                    else if(obj['type'].length ==2)
+                    {
+                        for ( var i = 0; i <2;i++){
+                        type1= obj['type'][0];
+                        type2= obj['type'][1];
+                    }
+                        var imgsrc = './json/img/' + obj['id'] + obj['ename'] + '.png';
+                        var sprsrc = './json/spr/' + obj['id'] + 'MS.png';
+                        var d=JSON.stringify(obj['base']);
+                        localStorage.base=d;
+                        $(a).append("<div class='product3'  >" +//获得图片
+                            "<div><img class='img4' src=" + imgsrc + "/></div>" +
+                            //获得小图
+                            "<div><img class='img5' src=" + sprsrc + "/></div>" +
+                            //获得名字
+                            "<div class='p9 pq'> " + obj['cname'] +"&nbsp;&nbsp;"+ obj['ename'] + " </div>" +
+                            //获得id
+                            "<div class='p8 pq'>  ID：" + obj['id'] + "</div>" +
+                            "<div class='pq'> <button id='button1' > " + type1 +  "</button> "+ "<button id='button2'> " + type2 +  "</button>    </div>" +
+                            "<div class='p7 pq'>  介绍：" + obj['i'] + "</div>" +
+                            "<iframe class='t'  src='./pmradar.html' scrolling='no'  frameborder='no'  ></iframe>"+
+                            "</div>");
+
+
+                        if(type1=='超能')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#FF5599");
+                            });
+                        }
+                        else if(type1=='草')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#77CC55");
+                            });
+                        }
+                        else if(type1=='一般')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#BBBBAA");
+                            });
+                        }
+                        else if(type1=='虫')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#AABB22");
+                            });
+                        }
+                        else if(type1=='水')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#3399FF");
+                            });
+                        }
+                        else if(type1=='炎')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#FF4422");
+                            });
+                        }
+                        else if(type1=='毒')
+                        {
+                            console.log("aaaaa")
+                            $(document).ready(function() {
+                                yy=$('#button1').css("background-color", "#AF5599");
+                            });
+                        }
+                        else if(type1=='电')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#FFCC33");
+                            });
+                        }
+                        else if(type1=='飞行')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#6699FF");
+                            });
+                        }
+                        else if(type1=='地上')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#D3AF55");
+                            });
+                        }
+                        else if(type1=='冰')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#77D3FF");
+                            });
+                        }
+                        else if(type1=='格斗')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#BB5544");
+                            });
+                        }
+                        else if(type1=='超能')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#FF5599");
+                            });
+                        }
+                        else if(type1=='岩石')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#BBAA66");
+                            });
+                        }
+                        else if(type1=='幽灵')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#6666BB");
+                            });
+                        }
+                        else if(type1=='龙')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#7766EE");
+                            });
+                        }
+                        else if(type1=='恶')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#775544");
+                            });
+                        }
+                        else if(type1=='钢')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#AAAABB");
+                            });
+                        }
+                        else if(type1=='妖精')
+                        {
+                            $(document).ready(function() {
+                                $('#button1').css("background-color", "#FFAAFF");
+                            });
+                        }
+
+
+
+                        if(type2=='超能')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#FF5599");
+                            });
+                        }
+                        else if(type2=='草')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#77CC55");
+                            });
+                        }
+                        else if(type2=='一般')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#BBBBAA");
+                            });
+                        }
+                        else if(type2=='虫')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#AABB22");
+                            });
+                        }
+                        else if(type2=='水')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#3399FF");
+                            });
+                        }
+                        else if(type2=='炎')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#FF4422");
+                            });
+                        }
+                        else if(type2=='毒')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#AF5599");
+                            });
+                        }
+                        else if(type2=='电')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#FFCC33");
+                            });
+                        }
+                        else if(type2=='飞行')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#6699FF");
+                            });
+                        }
+                        else if(type2=='地上')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#D3AF55");
+                            });
+                        }
+                        else if(type2=='冰')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#77D3FF");
+                            });
+                        }
+                        else if(type2=='格斗')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#BB5544");
+                            });
+                        }
+                        else if(type2=='超能')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#FF5599");
+                            });
+                        }
+                        else if(type2=='岩石')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#BBAA66");
+                            });
+                        }
+                        else if(type2=='幽灵')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#6666BB");
+                            });
+                        }
+                        else if(type2=='龙')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#7766EE");
+                            });
+                        }
+                        else if(type2=='恶')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#775544");
+                            });
+                        }
+                        else if(type2=='钢')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#AAAABB");
+                            });
+                        }
+                        else if(type2=='妖精')
+                        {
+                            $(document).ready(function() {
+                                $('#button2').css("background-color", "#FFAAFF");
+                            });
+                        }
+                    }
+
+                }
+            });
+        }
+
+
+
+
+    </script>
+</head>
+<body>
+<!-- 构建装一个容器 -->
+<div id="box">
+</div>
+</body>
+</html>
